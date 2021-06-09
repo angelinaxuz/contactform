@@ -1,0 +1,112 @@
+.contactform {
+  max-width: 1200px;
+  margin: 0 auto;
+  font-family: 'Roboto', sans-serif; }
+
+.contactform__title {
+  font-family: 'Rozha One', serif;
+  font-size: 70px;
+  font-weight: 400;
+  line-height: 1.4em;
+  color: #3D3161;
+  margin-bottom: 70px; }
+
+.btn {
+  width: 140px;
+  height: 40px;
+  display: inline-block;
+  background-color: #C1E457;
+  border: none;
+  font-size: 14px;
+  line-height: 1.14px;
+  color: #3D3161;
+  border-radius: 40px; }
+  @media (max-width: 560px) {
+    .btn {
+      background-color: #fff;
+      border: 1px solid #999999;
+      color: #999999;
+      width: 100%; } }
+
+.form {
+  display: flex;
+  justify-content: space-between; }
+  @media (max-width: 560px) {
+    .form {
+      display: flex;
+      flex-wrap: wrap;
+      width: 100%; } }
+  .form__description {
+    display: flex;
+    flex-wrap: wrap;
+    margin-bottom: 20px; }
+  .form__left {
+    width: 49%; }
+    @media (max-width: 560px) {
+      .form__left {
+        width: 100%; } }
+  .form__right {
+    width: 49%; }
+    @media (max-width: 560px) {
+      .form__right {
+        width: 100%; } }
+  .form__input {
+    border: none;
+    border-bottom: 1px solid #999999;
+    font-size: 16px;
+    outline: none;
+    width: 90%;
+    padding-top: 5px;
+    margin-bottom: 30px; }
+    @media (max-width: 560px) {
+      .form__input {
+        width: 100%; } }
+  .form__agreement {
+    display: flex;
+    justify-content: space-between; }
+    @media (max-width: 560px) {
+      .form__agreement {
+        display: flex;
+        flex-direction: column; } }
+
+.description {
+  font-size: 16px;
+  line-height: 1.12em;
+  color: #999999;
+  margin-bottom: 10px; }
+
+.message {
+  width: 100%;
+  height: 100px;
+  border: 1px solid #999999; }
+
+.agreement-checkbox {
+  color: #999999;
+  font-size: 12px;
+  line-height: 1.14em;
+  position: relative;
+  padding-left: 25px;
+  width: 55%; }
+  @media (max-width: 560px) {
+    .agreement-checkbox {
+      margin-bottom: 30px;
+      width: 100%; } }
+  .agreement-checkbox__icon {
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    border-radius: 10px;
+    border: 1px solid #999999;
+    position: absolute;
+    left: 0; }
+    .agreement-checkbox__icon:before {
+      display: inline-block;
+      width: 6px;
+      height: 11px;
+      border: solid black;
+      border-width: 0 2px 2px 0;
+      transform: rotate(45deg);
+      position: absolute;
+      left: 4px; }
+  input:checked + .agreement-checkbox__icon:before {
+    content: ''; }
