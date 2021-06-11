@@ -15,18 +15,26 @@
     <div class="contactform__title">Contact us</div>
     <form class="form" action="" id="myForm" method="POST" name="myform">
         <div class="form__left">
-            <input class="form__input" type="text" placeholder="Full Name" name="fullname">
-            <input class="form__input" type="text" placeholder="Email" name="email">
-            <input class="form__input" type="text" placeholder="Company" name="company">
+            <div class="form__group">
+                <input class="form__input" type="text" placeholder="Full Name" name="fullname">
+                <span class="errorMessage">ggg</span>
+            </div>
+            <div class="form__group">
+                <input class="form__input" type="text" placeholder="Email" name="email">
+                <span class="errorMessage">ggg</span>
+            </div>
+            <div class="form__group">
+                <input class="form__input" type="text" placeholder="Company" name="company">
+                <span class="errorMessage">ggg</span></div>
         </div>
         <div class="form__right">
             <div class="form__description">
                 <label class="description" for="message">Project description</label>
-                <textarea class="message" name="" id="message"></textarea>
+                <textarea class="message" name="message" id="message"></textarea>
             </div>
             <div class="form__agreement">
                 <label class="agreement-checkbox">
-                    <input type="checkbox" hidden/>
+                    <input type="checkbox" class="form__privacy" name="privacy" value="1"/>
                     <span class="agreement-checkbox__icon"></span>
                     I consent to having Calaton Systems LLC collect and process my personal details according to its
                     Privacy Policy.</label>
