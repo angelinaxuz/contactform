@@ -63,10 +63,21 @@ body {
     outline: none;
     width: 100%;
     padding-top: 5px; }
+    .form__input.error {
+      border: 1px solid red; }
     @media (max-width: 560px) {
       .form__input {
         width: 100%;
         font-size: 14px; } }
+  .form__label {
+    font-size: 16px;
+    line-height: 0.85rem;
+    color: #999999;
+    margin-bottom: 10px; }
+    @media (max-width: 560px) {
+      .form__label {
+        font-size: 14px;
+        line-height: 1rem; } }
   .form__agreement {
     display: flex;
     justify-content: space-between; }
@@ -78,17 +89,14 @@ body {
     display: none; }
   .form__group {
     position: relative;
-    margin-bottom: 20px; }
-
-.description {
-  font-size: 16px;
-  line-height: 0.85rem;
-  color: #999999;
-  margin-bottom: 10px; }
-  @media (max-width: 560px) {
-    .description {
+    margin-bottom: 7px;
+    padding-bottom: 15px; }
+    .form__group .error-message {
+      color: red;
       font-size: 14px;
-      line-height: 1rem; } }
+      position: absolute;
+      left: 0;
+      bottom: 0; }
 
 .message {
   width: 100%;
@@ -96,7 +104,8 @@ body {
   border: 1px solid #999999;
   outline: none;
   padding: 7px;
-  resize: none; }
+  resize: none;
+  margin-top: 8px; }
 
 .agreement-checkbox {
   color: #999999;
@@ -106,6 +115,8 @@ body {
   padding-left: 35px;
   padding-top: 6px;
   width: 61%; }
+  .agreement-checkbox.error {
+    color: red; }
   @media (max-width: 560px) {
     .agreement-checkbox {
       margin-bottom: 30px;
@@ -135,13 +146,3 @@ body {
     background-color: #C1E457; }
     input:checked + .agreement-checkbox__icon:before {
       content: ''; }
-
-.error {
-  border: 1px solid red; }
-
-.errorMessage {
-  color: red;
-  font-size: 14px;
-  position: absolute;
-  left: 0;
-  top: 25px; }

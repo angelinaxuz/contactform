@@ -4,13 +4,12 @@ myForm.addEventListener('submit', (e) => {
     e.preventDefault()
     let formData = new FormData(myForm)
     let values = Object.fromEntries(formData.entries())
-    let {fullname, email, company, message, privacy} = values
+    let {fullname, email, company, message} = values
 
     let errors = {}
 
     if (fullname.length < 2 || fullname.length > 30) {
         errors.fullname = "Имя не должно быть короче 2 символов и длиннее 30 символов"
-
     }
 
     let mailPattern = /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/
@@ -29,20 +28,28 @@ myForm.addEventListener('submit', (e) => {
     }
 
     if (!myForm.privacy.checked) {
-        errors.privacy = "Пожалуйста отметьте галочку"
+        errors.privacy = true
     }
-
-
-
 
     for (let el of myForm.elements) {
-        let name = el.getAttribute('name')
-        if (name in errors) {
-            el.classList.add("error")
+        let nameAttrValue = el.getAttribute('name')
+        let inputType = el.getAttribute('type')
+        if (nameAttrValue in errors) {
+            if (inputType === 'checkbox'){
+                showCheckboxInputError(el)
+            }else{
+                showTextInputError(el, errors[nameAttrValue])
+            }
         } else {
-            el.classList.remove("error")
+            if (inputType === 'checkbox'){
+                hideCheckboxInputError(el)
+            }else{
+                hideTextInputError(el)
+            }
+
         }
     }
+
 
     if (Object.keys(errors).length > 0) {
         alert('Поля заполнены неверно')
@@ -52,3 +59,32 @@ myForm.addEventListener('submit', (e) => {
 
 })
 
+
+function showTextInputError(input, text) {
+    let newError = document.createElement('span')
+    newError.classList.add("error-message")
+    newError.innerText = text
+    input.parentNode.appendChild(newError)
+    input.classList.add("error")
+}
+
+function showCheckboxInputError(input){
+    input.parentNode.classList.add("error")
+}
+
+
+function hideTextInputError(input) {
+    input.classList.remove("error")
+//    удалить span
+}
+
+function hideCheckboxInputError(input){
+    input.parentNode.classList.remove("error")
+}
+//для текущего импута написать addEventListener который будет убирать классы с ошибками
+
+
+
+// let input = document.querySelector('.form__input')
+//
+// showErrorItem(input, 'моя ошибка')
