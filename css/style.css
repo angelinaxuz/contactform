@@ -91,12 +91,20 @@ body {
     position: relative;
     margin-bottom: 7px;
     padding-bottom: 15px; }
+    @media (max-width: 560px) {
+      .form__group {
+        margin-bottom: 1px;
+        padding-bottom: 25px; } }
     .form__group .error-message {
       color: red;
       font-size: 14px;
       position: absolute;
       left: 0;
       bottom: 0; }
+      @media (max-width: 560px) {
+        .form__group .error-message {
+          font-size: 11px;
+          bottom: 2px; } }
 
 .message {
   width: 100%;

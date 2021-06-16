@@ -1,7 +1,8 @@
 const myForm = document.querySelector('#myForm')
 
-myForm.addEventListener('submit', (e) => {
-    e.preventDefault()
+let isEventListenerHandled = false
+
+function validate() {
     let formData = new FormData(myForm)
     let values = Object.fromEntries(formData.entries())
     let {fullname, email, company, message} = values
@@ -30,61 +31,92 @@ myForm.addEventListener('submit', (e) => {
     if (!myForm.privacy.checked) {
         errors.privacy = true
     }
+    return errors
+}
 
-    for (let el of myForm.elements) {
-        let nameAttrValue = el.getAttribute('name')
-        let inputType = el.getAttribute('type')
-        if (nameAttrValue in errors) {
-            if (inputType === 'checkbox'){
-                showCheckboxInputError(el)
-            }else{
-                showTextInputError(el, errors[nameAttrValue])
+myForm.addEventListener('submit', (e) => {
+        e.preventDefault()
+        let errors = validate()
+
+
+        for (let el of myForm.elements) {
+            if (el.tagName === 'button') continue
+            let nameAttrValue = el.getAttribute('name')
+            let inputType = el.getAttribute('type')
+            if (nameAttrValue in errors) {
+                if (inputType === 'checkbox') {
+                    showCheckboxInputError(el)
+                } else {
+                    showTextInputError(el, errors[nameAttrValue])
+                }
+            } else {
+                if (inputType === 'checkbox') {
+                    hideCheckboxInputError(el)
+                } else {
+                    hideTextInputError(el)
+                }
+
             }
-        } else {
-            if (inputType === 'checkbox'){
-                hideCheckboxInputError(el)
-            }else{
-                hideTextInputError(el)
+            if (!isEventListenerHandled) {
+                el.addEventListener('change', e => {
+
+                    let errors = validate()
+
+                    if (!(nameAttrValue in errors)) {
+
+                        if (inputType === 'checkbox') {
+                            hideCheckboxInputError(el)
+                        } else {
+                            hideTextInputError(el)
+                        }
+                    }
+                })
             }
 
         }
+        isEventListenerHandled = true
+
+        if (Object.keys(errors).length === 0) {
+
+            fetch('https://jsonplaceholder.typicode.com/todos/1', {
+                method: 'POST',
+                body: new FormData(myForm)
+            })
+                .then(function (response) {
+                    console.log(response)
+                    alert('Успешная отправка данных')
+                })
+        }
+
     }
-
-
-    if (Object.keys(errors).length > 0) {
-        alert('Поля заполнены неверно')
-    } else {
-        alert(`Congratulations! Name: ${fullname}, Email: ${email}`)
-    }
-
-})
+)
 
 
 function showTextInputError(input, text) {
-    let newError = document.createElement('span')
-    newError.classList.add("error-message")
-    newError.innerText = text
-    input.parentNode.appendChild(newError)
+    let newErrorLabel = document.createElement('span')
+    newErrorLabel.classList.add("error-message")
+    newErrorLabel.innerText = text
+    input.parentNode.appendChild(newErrorLabel)
     input.classList.add("error")
 }
 
-function showCheckboxInputError(input){
+function showCheckboxInputError(input) {
     input.parentNode.classList.add("error")
 }
 
 
 function hideTextInputError(input) {
     input.classList.remove("error")
-//    удалить span
+    let testErrorMessage = input.parentNode.querySelector('.error-message')
+    if (testErrorMessage) {
+        testErrorMessage.remove()
+    }
+
 }
 
-function hideCheckboxInputError(input){
+function hideCheckboxInputError(input) {
     input.parentNode.classList.remove("error")
 }
-//для текущего импута написать addEventListener который будет убирать классы с ошибками
 
 
 
-// let input = document.querySelector('.form__input')
-//
-// showErrorItem(input, 'моя ошибка')
